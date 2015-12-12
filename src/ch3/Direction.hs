@@ -1,6 +1,7 @@
 module Direction(
   Direction(Left, Right, Straight),
-  calculateDirection
+  calculateDirection,
+  calculateDirections,
 ) where
 import Point(Point(Point))
 
@@ -17,4 +18,8 @@ calculateDirection a b c = angleToDirection (ccw a b c)
           | angle < 0 = Direction.Right
           | otherwise = Direction.Straight
 
-
+calculateDirections:: [Point] -> [Direction]
+calculateDirections [] = []
+calculateDirections [_] = []
+calculateDirections [_, _] = []
+calculateDirections (x:y:z:xs) = calculateDirection x y z: calculateDirections (y:z:xs)
