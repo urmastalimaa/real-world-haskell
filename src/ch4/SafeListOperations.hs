@@ -1,4 +1,4 @@
-module CH4.SafeListOperations(safeHead, safeTail, safeLast, safeInit) where
+module CH4.SafeListOperations(safeHead, safeTail, safeLast, safeInit, splitWith) where
 
 safeHead:: [a] -> Maybe a
 safeHead [] = Nothing
@@ -15,3 +15,9 @@ safeLast xs = Just . last $ xs
 safeInit:: [a] -> Maybe [a]
 safeInit [] = Nothing
 safeInit xs = Just . init $ xs
+
+
+splitWith:: (a -> Bool) -> [a] -> [[a]]
+splitWith _ [] = []
+splitWith pred xs = fst : splitWith pred (drop 1 snd)
+  where (fst, snd) = break pred xs
