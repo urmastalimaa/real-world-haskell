@@ -27,3 +27,11 @@ groupBy check = foldr group [[]]
               group x zss@((y:ys):zs)
                 | check x y = (x:y:ys):zs
                 | otherwise = [x]: zss
+
+-- any cycle words unlines
+
+any :: (a -> Bool) -> [a] -> Bool
+any pred = foldr (\x acc -> pred x || acc) False
+
+-- cycle is interesting
+
