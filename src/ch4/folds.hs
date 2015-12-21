@@ -35,3 +35,9 @@ any pred = foldr (\x acc -> pred x || acc) False
 
 -- cycle is interesting
 
+words :: String -> [String]
+words = foldr words' [[]]
+  where words' _ [] = [[]]
+        words' ' ' xss@([]:_) = xss
+        words' ' ' xss = []:xss
+        words' c (xs:xss) = (c:xs):xss
