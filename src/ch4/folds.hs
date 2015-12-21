@@ -19,3 +19,11 @@ takeWhile1 _ [] = []
 
 takeWhile2 :: (a -> Bool) -> [a] -> [a]
 takeWhile2 pred = foldr (\x acc -> if pred x then x:acc else acc) []
+
+groupBy :: (a -> a -> Bool) -> [a] -> [[a]]
+groupBy check = foldr group [[]]
+        where group _ [] = [[]]
+              group x ([]: zs) = [x] : zs
+              group x zss@((y:ys):zs)
+                | check x y = (x:y:ys):zs
+                | otherwise = [x]: zss
