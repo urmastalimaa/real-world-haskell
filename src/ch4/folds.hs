@@ -28,8 +28,6 @@ groupBy check = foldr group [[]]
                 | check x y = (x:y:ys):zs
                 | otherwise = [x]: zss
 
--- any cycle words unlines
-
 any :: (a -> Bool) -> [a] -> Bool
 any pred = foldr (\x acc -> pred x || acc) False
 
@@ -41,3 +39,6 @@ words = foldr words' [[]]
         words' ' ' xss@([]:_) = xss
         words' ' ' xss = []:xss
         words' c (xs:xss) = (c:xs):xss
+
+unlines :: [String] -> String
+unlines = foldr (\s acc -> s ++ '\n' : acc) []
